@@ -36,9 +36,9 @@ class Dishdetail extends Component {
         if(dish.comments) {
             const comments = dish.comments.map((c) => {
                 return (
-                    <div>
+                    <div key={c.id}>
                         <p>{c.comment}</p>
-                        <p>-- {c.author}, {c.date}</p>
+                        <p>-- {c.author}, {this.formatDate(c.date)}</p>
                     </div>
                 );
             })
@@ -50,8 +50,17 @@ class Dishdetail extends Component {
         }
     }
 
+    formatDate(date) {
+        return new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'})
+            .format(new Date(Date.parse(date)));
+    }
+
     render() {
-        return this.renderDish(this.props.dish);
+        return (
+            <div className="container">
+                {this.renderDish(this.props.dish)}
+            </div>
+        );
     }
 }
 
