@@ -3,7 +3,9 @@ import { Navbar, NavbarBrand } from 'reactstrap';
 import { DISHES } from '../shared/dishes';
 
 import Menu from './MenuComponent';
-import Dishdetail from './DishdetailComponent'
+import Dishdetail from './DishdetailComponent';
+import Header from './HeaderComponent';
+import Footer from './FooterComponent';
 
 class Main extends Component {
 
@@ -23,13 +25,10 @@ class Main extends Component {
   render() {
     return (
       <div>
-        <Navbar dark color="primary">
-          <div className="container">
-            <NavbarBrand href="/">Ristorante Cão Fusão</NavbarBrand>
-          </div>
-        </Navbar>
+        <Header />
         <Menu dishes={this.state.dishes} onClick={(dishId) => this.onDishSelect(dishId)} />
         <Dishdetail dish={this.state.dishes.filter((dish) => dish.id === this.state.selectedDish)[0]} />
+        <Footer />
       </div>
     );
   }
