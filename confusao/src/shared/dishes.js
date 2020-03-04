@@ -2,7 +2,7 @@ export const DISHES =
     [
         {
         id: 0,
-        name:'Uthappizza',
+        name:'Ratatouille',
         image: '/assets/images/uthappizza.png',
         category: 'mains',
         label:'Hot',
