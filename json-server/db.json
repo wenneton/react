@@ -201,6 +201,22 @@
       "comment": "It's your birthday, we're gonna party!",
       "author": "25 Cent",
       "date": "2011-12-02T17:57:28.556094Z"
+    },
+    {
+      "dishId": 0,
+      "rating": "1",
+      "author": "Adriana",
+      "comment": "A rapaziada gostou muito!!",
+      "date": "2020-03-06T15:21:17.111Z",
+      "id": 20
+    },
+    {
+      "dishId": 3,
+      "rating": "1",
+      "author": "Markus",
+      "comment": "Wow! Wow!",
+      "date": "2020-03-09T13:18:56.399Z",
+      "id": 21
     }
   ],
   "promotions": [
