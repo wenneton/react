@@ -184,3 +184,69 @@ export const leadersFailed = (errMess) => ({
     type: ActionTypes.LEADERS_FAILED,
     payload: errMess
 });
+
+export const postFeedback = (
+    firstname,
+    lastname,
+    telnum,
+    email,
+    agree,
+    contactType,
+    message
+) => (dispatch) => {
+    const newFeedback = {
+        firstname,
+        lastname,
+        telnum,
+        email,
+        agree,
+        contactType,
+        message
+    }
+    newFeedback.date = new Date().toISOString();
+
+    return fetch(baseUrl + 'feedback', {
+        method: "POST",
+        body: JSON.stringify(newFeedback),
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "same-origin"
+    })
+    .then(response => {
+        if (response.ok) {
+            return response;
+          } else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+          }
+        },
+        error => {
+              throw error;
+        })
+    .then(response => response.json())
+    .then(response => {dispatch(addFeedback(response)); alert('Feedback posted successfully!');})
+    .catch(error =>  { console.log('post feedback', error.message); alert('Your feedback could not be sended\nError: '+error.message); });
+};
+
+export const addFeedback = (
+    firstname,
+    lastname,
+    telnum,
+    email,
+    agree,
+    contactType,
+    message
+) => ({
+    type: ActionTypes.ADD_FEEDBACK,
+    payload: {
+        firstname,
+        lastname,
+        telnum,
+        email,
+        agree,
+        contactType,
+        message
+    }
+});

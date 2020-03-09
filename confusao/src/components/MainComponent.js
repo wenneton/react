@@ -11,7 +11,7 @@ import Home from './HomeComponent';
 import Contact from './ContactComponent';
 import Dishdetail from './DishdetailComponent';
 import About from './AboutComponent';
-import { addComment, fetchDishes, fetchComments, fetchPromos, postComment, fetchLeaders } from '../redux/ActionCreators';
+import { addComment, fetchDishes, fetchComments, fetchPromos, postComment, fetchLeaders, postFeedback } from '../redux/ActionCreators';
 
 const mapStateToProps = state => {
   return {
@@ -29,7 +29,9 @@ const mapDispatchToProps = dispatch => ({
   fetchComments: () => dispatch(fetchComments()),
   fetchPromos: () => dispatch(fetchPromos()),
   postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment)),
-  fetchLeaders: () => dispatch(fetchLeaders())
+  fetchLeaders: () => dispatch(fetchLeaders()),
+  postFeedback: (firstname, lastname, telnum, email, agree, contactType, message) => 
+    dispatch(postFeedback(firstname, lastname, telnum, email, agree, contactType, message))
 });
 
 class Main extends Component {
@@ -70,6 +72,14 @@ class Main extends Component {
       );
     }
 
+    const ContactPage = () => {
+      return(
+        <Contact
+        resetFeedbackForm={this.props.resetFeedbackForm}
+        postFeedback={this.props.postFeedback} />
+      )
+    }
+
     return (
       <div>
         <Header />
@@ -79,7 +89,7 @@ class Main extends Component {
               <Route path='/home' component={HomePage} />
               <Route exact path='/menu' component={() => <Menu dishes={this.props.dishes} />} />
               <Route path='/menu/:dishId' component={DishWithId} />
-              <Route exact path='/contactus' component={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm} />} />
+              <Route exact path='/contactus' component={ContactPage} />
               <Route exact path='/aboutus' component={() => <About leaders={this.props.leaders}/>} />
               <Redirect to='/home' />
             </Switch>
