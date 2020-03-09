@@ -80,6 +80,15 @@ class Main extends Component {
       )
     }
 
+    const AboutUsPage = () => {
+      return(
+        <About
+        leaders={this.props.leaders}
+        isLoading={this.props.leaders.isLoading}
+        errMess={this.props.leaders.errMess} />
+      )
+    }
+
     return (
       <div>
         <Header />
@@ -90,7 +99,7 @@ class Main extends Component {
               <Route exact path='/menu' component={() => <Menu dishes={this.props.dishes} />} />
               <Route path='/menu/:dishId' component={DishWithId} />
               <Route exact path='/contactus' component={ContactPage} />
-              <Route exact path='/aboutus' component={() => <About leaders={this.props.leaders}/>} />
+              <Route exact path='/aboutus' component={AboutUsPage} />
               <Redirect to='/home' />
             </Switch>
           </CSSTransition>
